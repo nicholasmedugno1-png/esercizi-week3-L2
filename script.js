@@ -25,7 +25,7 @@ ASSEGNARE CLASSE AI VARI ELEMENTI CREATI PER STILIZZARE COME DA FOTO CON "classL
 
 
 const task = document.querySelector('#lista-task')
-const date = document.querySelector('.divData')
+
 
 // ASSEGNIAMO ALLA FUNZIONE I DUE VALORI CHE RICEVEREMO
 function aggiungiTask(valoreInserito, priorita) {
