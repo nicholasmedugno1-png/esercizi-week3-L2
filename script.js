@@ -94,7 +94,7 @@ btnCompletati.addEventListener('click', (e) => {
 
 
 
-function aggiungiTask(arrayDaStampare = myTask) {
+function aggiungiTask(arrayDaStampare = myTask) {   //aggiungiamo un valore da passare in modo da poter adattare la funzione ai filtri
 	arrayDaStampare.forEach((task, index) => {
 		const newLi = document.createElement('li');
 		newLi.classList.add(`priorita-${task.priorita}`);
@@ -133,9 +133,7 @@ function aggiungiTask(arrayDaStampare = myTask) {
 }
 
 
-function checkArea(task) {
 
-}
 
 function aggiornaContatore() {
 	contatore.textContent = myTask.length;
@@ -147,6 +145,7 @@ aggiornaContatore();
 
 //click per aggiungere elemento
 btnPushTask.addEventListener('click', () => {
+if(inputValue.value !== ''){
 
 	lista.textContent = ''		//ripuliamo la lista altrimenti stampa sempre tutto l'array
 	const nuovoOggettoTask = {     //creiamo l oggetto da inserire e gli assegniamo i valori estratti dall input
@@ -159,6 +158,9 @@ btnPushTask.addEventListener('click', () => {
 	inputValue.value = ''			//ripuliamo il campo di input dopo il click
 	aggiungiTask();					//richiamiamo la funzione per aggiungere a schermo avendo ripulito il contenuto dell array stampa solo l oggetto creato
 	aggiornaContatore();			//aggiorniamo il contatore dopo aver aaggiunto l oggetto
+} else {
+	console.log('hai inserito null')
+}
 })
 
 
@@ -182,11 +184,13 @@ lista.addEventListener('click', (e) => {
 })
 
 
-lista.addEventListener('change', (e) => {
+//
 
+lista.addEventListener('change', (e) => {
+	
 	const index = e.target.id - 1
 	if (e.target.type === 'checkbox') {
-		myTask[index].completato = e.target.checked;
+		myTask[index].completato = e.target.checked;  
 		console.log(`Il task all'indice ${index} ora è: ${e.target.checked}`);
 	}
 	const testoSpan = e.target.nextElementSibling;
