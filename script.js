@@ -1,73 +1,190 @@
-/*
-  REGOLE
-  - Continua quello che hai iniziato stamani in classe.
-  - Niente eventi (li vediamo domani): chiama le funzioni dalla console o all'avvio.
-  - Solo const/let, mai var. Solo querySelector/querySelectorAll per il DOM.
-*/
+const lista = document.querySelector('#lista-task');
+const contatore = document.querySelector('#contatore');
+const btnPushTask = document.querySelector('#bottone-aggiungi');
+const inputValue = document.querySelector('#nuovo-task');
+const inputPriority = document.querySelector('#user-priority');
+const barAggiunta = document.querySelector('.aggiunta')
 
-/* SCRIVI QUI LE TUE FUNZIONI:
-   1. Modifica aggiungiTask per accettare priorita
-   2. Aggiungi bottone Elimina su ogni task
-   6. evidenzia(indice) / togliEvidenza(indice)
-   7. data automatica nel task
-   8. contaPerPriorita()
-*/
+const myTask = [{
+		titoloTask: 'Pagare le bollette',
+		priorita: 'alta',
+		data: new Date(),
+		completato: true
+	},
+	{
+		titoloTask: 'Studiare JavaScript',
+		priorita: 'media',
+		data: new Date(),
+		completato: false
+	},
+	{
+		titoloTask: 'Comprare il pane',
+		priorita: 'bassa',
+		data: new Date(),
+		completato: true
+	},
+	{
+		titoloTask: 'Chiamare il dentista',
+		priorita: 'alta',
+		data: new Date(),
+		completato: false
+	},
+	{
+		titoloTask: 'Riposarsi',
+		priorita: 'bassa',
+		data: new Date(),
+		completato: true
+	},
+	{
+		titoloTask: 'Spritz Time',
+		priorita: 'alta',
+		data: new Date(),
+		completato: false
+	},
+];
+
+function btnFilto(task) {
+
+	const btnTutti = document.createElement('button')
+	btnTutti.setAttribute( 'type', 'button')
+	btnTutti.setAttribute('id', 'BtnTutti')
+	btnTutti.textContent = 'Tutti'
+	barAggiunta.appendChild(btnTutti)
+	
+btnTutti.addEventListener('click', () =>{
+	lista.textContent = '';
+	aggiungiTask()
+})
 
 
-/* ESTRARRE "UL" DAL "HTML" E CREARCI UN "LI" ALL'INTERNO CON  "createElement"
-CREARE FUNZIONE CHE RICEVE DEI VALORI INSERITRI DALL UTENTE 
-ESTRARRE I VALORI E INSERIRLI IN VARIABILI PER RESTITUIRLI NELL ORDINE IN CUI CI SERVONO
-USARE "appendChild" PER APPENDERE GLI ELEMENTI AL PADRE OVVERO "UL"
-ASSEGNARE CLASSE AI VARI ELEMENTI CREATI PER STILIZZARE COME DA FOTO CON "classList.add"
-*/
 
+	
+	const btnAttivi = document.createElement('button')
+	btnAttivi.setAttribute( 'type', 'button')
+	btnTutti.setAttribute('id', 'btnAttivi')
+	btnAttivi.textContent = 'Attivi'
+	barAggiunta.appendChild(btnAttivi)
 
-
-
-const task = document.querySelector('#lista-task')
-
-
-// ASSEGNIAMO ALLA FUNZIONE I DUE VALORI CHE RICEVEREMO
-function aggiungiTask(valoreInserito, priorita) {
-
-  //CREAIAMO IL LI CHE DOVRA CONTENETE TUTTE LE CARATTERISTICHE
-  const newTask = document.createElement('li');
-  //ASSEGNIAMO LA CLASSE PER PER FLEXARE I CONTENUTI
-  newTask.classList.add('aggiunta');
-  //ESTRAIAMO IL VALORE INSERITO DALL UTENTE
-  const newValoreInserito = document.createElement('span');
-  newValoreInserito.textContent = valoreInserito;
-  
-  //ESTRAIAMO LA PRIORITA' DELL INPUT SEMPRE INSERITA DALL UTENTE
-  const newPriorita = document.createElement('span')
-  newPriorita.textContent = priorita
-  //ASSEGNIAMO CLASSE ALLA PRIORITA 
- newPriorita.classList.add('badge')
-  
-  //GENERIAMO UNA DATA CHE SI AGGIORNA IN AUTOMATICO 
-  const newDate = document.createElement('span')
-  newDate.textContent =  new Date().toLocaleDateString('it-IT' );
-  //ASSERGNIAMO CLASSE ALLA DATA PER SPOSTARLA SULLA DESTRA 
-   newPriorita.classList.add('divData')
-
-  //GENERIAMO IL BUTTON ELIMINA  
-  const newButton = document.createElement('button');
-  newButton.textContent = 'Elimina'
-  
-  
-  
-  newTask.appendChild(newValoreInserito);
-  newTask.appendChild(newPriorita);
-  newTask.appendChild(newDate);
-  newTask.appendChild(newButton);
-
-  task.appendChild(newTask);
-
-      
+	
+	
+	
+	
+	
+	const btnCompletati = document.createElement('button')
+	btnCompletati.setAttribute( 'type', 'button')
+	btnTutti.setAttribute('id', 'btnCompletati')
+	btnCompletati.textContent = 'Completati'
+	barAggiunta.appendChild(btnCompletati)
 }
 
 
-aggiungiTask('ciao', 'urgente')
-aggiungiTask('ciao', 'urgente')
-aggiungiTask('ciao', 'urgente')
 
+	
+btnFilto();
+
+
+
+function aggiungiTask() {
+	myTask.forEach((task , index) => {
+		const newLi = document.createElement('li');
+		newLi.classList.add(`priorita-${task.priorita}`);
+		
+		const btnCheck = document.createElement('input');
+				btnCheck.setAttribute('type' , 'checkbox');
+				btnCheck.setAttribute('id', index + 1)
+				btnCheck.checked = task.completato;
+				newLi.appendChild(btnCheck)
+
+		const textSpan = document.createElement('span');
+		textSpan.textContent = task.titoloTask;
+		newLi.appendChild(textSpan);
+		
+
+		const badge = document.createElement('span');
+		badge.classList.add('badge');
+		badge.textContent = task.priorita;
+		newLi.appendChild(badge);
+
+		const taskDate = document.createElement('span');
+		taskDate.classList.add('data', 'divData');
+		taskDate.textContent = task.data.toLocaleString('it-IT');
+
+		const elimina = document.createElement('button');
+		elimina.textContent = 'Elimina';
+		elimina.setAttribute('type', 'button')
+		elimina.setAttribute('id' , index + 1)
+		taskDate.appendChild(elimina);
+		newLi.appendChild(taskDate);
+
+		lista.appendChild(newLi);
+
+	});
+
+}
+
+
+function checkArea(task) {
+	
+}
+
+function aggiornaContatore() {
+	contatore.textContent = myTask.length;
+}
+
+aggiungiTask();
+aggiornaContatore();
+
+
+//click per aggiungere elemento
+btnPushTask.addEventListener('click', () => {
+	
+	lista.textContent = ''		//ripuliamo la lista altrimenti stampa sempre tutto l'array
+	const nuovoOggettoTask = {     //creiamo l oggetto da inserire e gli assegniamo i valori estratti dall input
+		titoloTask: inputValue.value,
+		priorita: inputPriority.value, 
+		data: new Date(),
+		completato: false
+	};
+		myTask.push(nuovoOggettoTask)	//pushiamo l oggetto creato nell'array
+		inputValue.value = ''			//ripuliamo il campo di input dopo il click
+		aggiungiTask();					//richiamiamo la funzione per aggiungere a schermo avendo ripulito il contenuto dell array stampa solo l oggetto creato
+		aggiornaContatore();			//aggiorniamo il contatore dopo aver aaggiunto l oggetto
+	})
+	
+
+
+//click per eliminare elemento
+lista.addEventListener('click', (e) => {
+	
+	if(e.target.type === 'button') {
+		myTask.splice(e.target.id - 1, 1)
+		lista.textContent = ''
+		aggiungiTask()
+		aggiornaContatore()
+		}
+		
+})
+		
+	
+lista.addEventListener('change', (e) => {
+
+	const index = e.target.id - 1
+	if(e.target.type === 'checkbox') {
+		myTask[index].completato = e.target.checked;
+		console.log(`Il task all'indice ${index} ora è: ${e.target.checked}`);
+	}
+	const testoSpan = e.target.nextElementSibling;
+	
+	if(e.target.checked === true) {
+		testoSpan.style.textDecoration = 'line-through';
+            testoSpan.style.color = '#888';
+	} else {
+		testoSpan.style.textDecoration = 'none';
+		testoSpan.style.color = 'black'
+	}
+})
+	
+	
+
+
+	  

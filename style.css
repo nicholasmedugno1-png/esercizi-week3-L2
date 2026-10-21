@@ -14,7 +14,7 @@ h1 {
 	margin-bottom: 24px;
 }
 
-.aggiunta {   /* AGGIUNTA A RIGA 24 DI JS PER FLEXARE IL LI*/
+.aggiunta {   /* AGGIUNTA A RIGA 36 DI JS PER FLEXARE IL LI*/
 	display: flex;
 	gap: 10px;
 	margin-bottom: 20px;
@@ -49,8 +49,8 @@ li {
    - .data (la data di creazione)
    - .evidenziato (sfondo giallo, bordo)
 */
-
-.priorita-alta {
+/* aggiunto if nel codice js alla riga 37 */
+.priorita-alta {    
 	background-color: #FDE2E2;
 }
 
