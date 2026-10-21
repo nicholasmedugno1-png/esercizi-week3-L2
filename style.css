@@ -14,7 +14,7 @@ h1 {
 	margin-bottom: 24px;
 }
 
-.aggiunta {   /* AGGIUNTA A RIGA 36 DI JS PER FLEXARE IL LI*/
+.aggiunta {   
 	display: flex;
 	gap: 10px;
 	margin-bottom: 20px;
@@ -79,11 +79,11 @@ li {
 }
 
 .evidenziato {  
-									/* CLASSE CHE EVIDENZIA BORDO */
+									
 	border: 3px solid #F6C948;
 }
 
-.divData {        /*CSS PER LA DATA LA SPOSTA SULLA DESTRA*/
+.divData {        
 	width: fit-content;
 	float: right;
 }
