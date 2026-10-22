@@ -148,7 +148,7 @@ aggiornaContatore();
 
 //click per aggiungere elemento
 btnPushTask.addEventListener('click', () => {
-
+if(inputValue.value !== ''){
 	lista.textContent = ''		//ripuliamo la lista altrimenti stampa sempre tutto l'array
 	const nuovoOggettoTask = {     //creiamo l oggetto da inserire e gli assegniamo i valori estratti dall input
 		titoloTask: inputValue.value.trim(),
@@ -160,6 +160,7 @@ btnPushTask.addEventListener('click', () => {
 	inputValue.value = ''			//ripuliamo il campo di input dopo il click
 	aggiungiTask();					//richiamiamo la funzione per aggiungere a schermo avendo ripulito il contenuto dell array stampa solo l oggetto creato
 	aggiornaContatore();			//aggiorniamo il contatore dopo aver aaggiunto l oggetto
+} 
 })
 
 //click per eliminare elemento
