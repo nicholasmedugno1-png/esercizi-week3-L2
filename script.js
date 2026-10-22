@@ -183,7 +183,7 @@ lista.addEventListener('change', (e) => {
 		myTask[index].completato = e.target.checked;
 		console.log(`Il task all'indice ${index} ora è: ${e.target.checked}`);
 	}
-	const testoSpan = e.target.nextElementSibling;
+	const testoSpan = e.target.nextElementSibling;  //estraiamo il valore dell elemento successivo all evento (da usare solo se siamo sicuri dell elemento )
 
 	if (e.target.checked === true) {
 		testoSpan.style.textDecoration = 'line-through';
