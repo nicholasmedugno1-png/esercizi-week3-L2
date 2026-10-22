@@ -3,7 +3,7 @@ const contatore = document.querySelector('#contatore');
 const btnPushTask = document.querySelector('#bottone-aggiungi');
 const inputValue = document.querySelector('#nuovo-task');
 const inputPriority = document.querySelector('#user-priority');
-const barAggiunta = document.querySelector('.aggiunta')
+const barAggiunta = document.querySelector('#btnFiltro')
 
 const myTask = [{
 	titoloTask: 'Pagare le bollette',
@@ -47,6 +47,7 @@ const myTask = [{
 const btnTutti = document.createElement('button')
 btnTutti.setAttribute('type', 'button')
 btnTutti.textContent = 'Tutti'
+btnTutti.classList.add('btnFiltri')
 barAggiunta.appendChild(btnTutti)
 
 btnTutti.addEventListener('click', () => {
@@ -60,6 +61,7 @@ btnTutti.addEventListener('click', () => {
 const btnAttivi = document.createElement('button')
 btnAttivi.setAttribute('type', 'button')
 btnAttivi.textContent = 'Attivi'
+btnAttivi.classList.add('btnFiltri')
 barAggiunta.appendChild(btnAttivi)
 
 btnAttivi.addEventListener('click', (e) => {
@@ -77,6 +79,7 @@ btnAttivi.addEventListener('click', (e) => {
 const btnCompletati = document.createElement('button')
 btnCompletati.setAttribute('type', 'button')
 btnCompletati.textContent = 'Completati'
+btnCompletati.classList.add('btnFiltri')
 barAggiunta.appendChild(btnCompletati)
 
 
@@ -94,7 +97,7 @@ btnCompletati.addEventListener('click', (e) => {
 
 
 
-function aggiungiTask(arrayDaStampare = myTask) {   //aggiungiamo un valore da passare in modo da poter adattare la funzione ai filtri
+function aggiungiTask(arrayDaStampare = myTask) {
 	arrayDaStampare.forEach((task, index) => {
 		const newLi = document.createElement('li');
 		newLi.classList.add(`priorita-${task.priorita}`);
@@ -145,7 +148,6 @@ aggiornaContatore();
 
 //click per aggiungere elemento
 btnPushTask.addEventListener('click', () => {
-if(inputValue.value !== ''){
 
 	lista.textContent = ''		//ripuliamo la lista altrimenti stampa sempre tutto l'array
 	const nuovoOggettoTask = {     //creiamo l oggetto da inserire e gli assegniamo i valori estratti dall input
@@ -158,18 +160,7 @@ if(inputValue.value !== ''){
 	inputValue.value = ''			//ripuliamo il campo di input dopo il click
 	aggiungiTask();					//richiamiamo la funzione per aggiungere a schermo avendo ripulito il contenuto dell array stampa solo l oggetto creato
 	aggiornaContatore();			//aggiorniamo il contatore dopo aver aaggiunto l oggetto
-} else {
-	console.log('hai inserito null')
-}
 })
-
-
-
-
-
-
-
-
 
 //click per eliminare elemento
 lista.addEventListener('click', (e) => {
@@ -184,13 +175,11 @@ lista.addEventListener('click', (e) => {
 })
 
 
-//
-
 lista.addEventListener('change', (e) => {
-	
+
 	const index = e.target.id - 1
 	if (e.target.type === 'checkbox') {
-		myTask[index].completato = e.target.checked;  
+		myTask[index].completato = e.target.checked;
 		console.log(`Il task all'indice ${index} ora è: ${e.target.checked}`);
 	}
 	const testoSpan = e.target.nextElementSibling;
@@ -203,8 +192,3 @@ lista.addEventListener('change', (e) => {
 		testoSpan.style.color = 'black'
 	}
 })
-
-
-
-
-

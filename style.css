@@ -89,8 +89,33 @@ li {
 }
 
 li button {
+	color: red;
 	font-size: 12px;
 	height: fit-content;
 	padding: 4px;
 	margin-left: 5px;
 }
+li button:hover {
+	background-color: red;
+	color: white;
+	border-radius: 2px;
+	border: 1px solid red;
+}
+
+#taskFilter{
+	margin: 0 auto;
+}
+
+.btnFiltri {
+	margin-left: 10px;
+}
+
+
+.btnFiltri:hover{
+	background-color: #1b2845;
+	color: #E2F5E2;
+	border-radius: 2px;
+	border: #1b2845;
+	
+}
+
